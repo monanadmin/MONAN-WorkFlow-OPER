@@ -36,6 +36,15 @@ Cloning this repository, you will get this files:
 ### How-to get started
 
 - Load the ECFLow module on Egeon: `Module load ecflow/5.8.4`
+- It is important chooseyour PORT NUMBER to install your server. We used the 1735 PORT NUMBER. If you want to use other number, please edit the `ECF_PORT` var in the files `start.ksh` and `stop.ksh`:
+~~~
+export ECF_PORT=<your_port_number>
+~~~
+
+- And, before you play your suite, it is very important to export the `ECF_PORT` environment variable:
+~~~
+export ECF_PORT=<your_port_number>
+~~~
 - Initialize the ECFlow client-server (if it's not already up):
 ~~~
 cd MONAN-WorkFlow-OPER/eclogs
@@ -60,15 +69,6 @@ And, edit the ECF_INCLUDE var with your `includes` directory in the file `MONAN_
 edit ECF_INCLUDE "/mnt/beegfs/<your_rootdirectory>/MONAN-WorkFlow-OPER/includes"
 ~~~
 
-- It is important chooseyour PORT NUMBER to install your server. We used the 1735 PORT NUMBER. If you want to use other number, please edit the `ECF_PORT` var in the files `start.ksh` and `stop.ksh`:
-~~~
-export ECF_PORT=<your_port_number>
-~~~
-
-- And, before you play your suite, it is very important to export the `ECF_PORT` environment variable:
-~~~
-export ECF_PORT=<your_port_number>
-~~~
 
 - Now, start your suite for the very first time:
 ~~~
