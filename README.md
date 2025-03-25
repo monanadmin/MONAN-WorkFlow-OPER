@@ -43,7 +43,34 @@ start.ksh
 ~~~
 
 - Use the `stop.ksh` script if you want to stop the ECF client-server process.
-- Start your suite for the very first time:
+- Before play the operational suite, some important variables need to be filled correctly. Please, do it:
+
+Edit the `ECF_HOME` var with your main suite directory in the file `MONAN_OPER.def` :
+~~~
+   edit ECF_HOME "/mnt/beegfs/<your_rootdirectory>/MONAN-WorkFlow-OPER"
+~~~
+
+Edit the `ECF_HOST` var with your machine hostname in the file `MONAN_OPER.def` :
+~~~
+edit ECF_HOST "<your_hostname>.cptec.inpe.br"
+~~~
+
+And, edit the ECF_INCLUDE var with your `includes` directory in the file `MONAN_OPER.def` :
+~~~
+edit ECF_INCLUDE "/mnt/beegfs/<your_rootdirectory>/MONAN-WorkFlow-OPER/includes"
+~~~
+
+- It is important chooseyour PORT NUMBER to install your server. We used the 1735 PORT NUMBER. If you want to use other number, please edit the `ECF_PORT` var in the files `start.ksh` and `stop.ksh`:
+~~~
+export ECF_PORT=<your_port_number>
+~~~
+
+- And, before you play your suite, it is very important to export the `ECF_PORT` environment variable:
+~~~
+export ECF_PORT=<your_port_number>
+~~~
+
+- Now, start your suite for the very first time:
 ~~~
 cd MONAN-WorkFlow-OPER
 ecflow_client --load=MONAN-OPER.def
@@ -56,6 +83,20 @@ ecflow_client --begin=MONAN-OPER
 cd MONAN-WorkFlow-OPER/eclogs
 ecflow_ui >> ecflowview.${USER}.logs&
 ~~~
+
+
+
+- Install the MONAN scripts:
+~~~
+cd MONAN-WorkFlow-OPER/MONAN_OPER/MONAN
+install_MONAN-MODEL-scripts.bash
+~~~
+This script will clon the `script_CD-CT` scripts and install (clone and compile) the MONAN-Model ante CONVERT-MPAS files.
+
+
+
+
+
 
 Done! 
 
