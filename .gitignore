@@ -1,0 +1,8 @@
+*.?
+*.job?
+done*txt
+*check
+*log
+*usr
+.venv
+scripts_CD-CT

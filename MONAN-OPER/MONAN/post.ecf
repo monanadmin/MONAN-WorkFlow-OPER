@@ -1,0 +1,44 @@
+%include <head.h>
+      
+#------------------------------------------------------------------------------------------#
+# !SCRIPT: run_post
+#
+# !DESCRIPTION:
+#     Script to run the MONAN model post-processing - CONVERT_MPAS.
+#     
+#------------------------------------------------------------------------------------------#
+
+
+
+# Input variables:-------------------------------------------------------------------------#
+EXP=%EXP%
+RES=%RES%
+YYYYMMDDHHi=%YYYY%%MM%%DD%00
+FCST=%FCSTH%
+#------------------------------------------------------------------------------------------#
+
+
+# Local variables:-------------------------------------------------------------------------#
+DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY1}/scripts_CD-CT
+MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+#------------------------------------------------------------------------------------------#
+
+
+
+
+# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
+
+ecflow_client --label=Info "Running 4.run_post.bash"
+ecflow_client --label=date "${YYYYMMDDHHi}"
+ecflow_client --label=VERSION "${MVERSION}"
+
+cd ${DIRSCRIPTSCDCT}/scripts
+${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+
+#------------------------------------------------------------------------------------------#
+
+
+
+
+%include <tail.h>
+# file is served by ecflow-server

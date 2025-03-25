@@ -1,0 +1,44 @@
+%include <head.h>
+      
+#------------------------------------------------------------------------------------------#
+# !SCRIPT: run_pre
+#
+# !DESCRIPTION:
+#     Script to run the pre of MONAN model .
+#     
+#------------------------------------------------------------------------------------------#
+
+
+
+# Input variables:-------------------------------------------------------------------------#
+EXP=%EXP%
+RES=%RES%
+YYYYMMDDHHi=%YYYY%%MM%%DD%00
+FCST=%FCSTH%
+#------------------------------------------------------------------------------------------#
+
+
+# Local variables:-------------------------------------------------------------------------#
+DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY1}/scripts_CD-CT
+MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+#------------------------------------------------------------------------------------------#
+
+
+
+
+# Run the 2.pre_processing.bash script from scripts_CDCT oficial repo:---------------------#
+
+ecflow_client --label=Info "Running  2.pre_processing.bash"
+ecflow_client --label=date "${YYYYMMDDHHi}"
+ecflow_client --label=VERSION "${MVERSION}"
+
+cd ${DIRSCRIPTSCDCT}/scripts
+${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+
+#------------------------------------------------------------------------------------------#
+
+
+
+
+%include <tail.h>
+# file is served by ecflow-server
