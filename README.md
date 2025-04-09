@@ -28,7 +28,6 @@ Cloning this repository, you will get this files:
 |   `-- includes
 |       |-- head.h
 |       `-- tail.h
-`-- tree.txt
 ~~~ 
 
 
