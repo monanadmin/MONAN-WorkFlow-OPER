@@ -27,6 +27,7 @@ FCST=%FCSTH%
 # Local variables:-------------------------------------------------------------------------#
 DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY1}/scripts_CD-CT
 MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
 #------------------------------------------------------------------------------------------#
 
 
@@ -44,6 +45,15 @@ ${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 #------------------------------------------------------------------------------------------#
 
 
+# Final data output directory:
+mkdir -p ${DIROUTPUT}/${YYYYMMDDHHi}/
+
+# Copy post:
+cp -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}/Post/* ${DIROUTPUT}/${YYYYMMDDHHi}/
+
+# Remove all output files from the original output diretory dataout:
+rm -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}
+rm -fr ${DIRSCRIPTSCDCT}/datain/${YYYYMMDDHHi}
 
 
 %include <tail.h>
