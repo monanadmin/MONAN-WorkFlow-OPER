@@ -1,19 +1,20 @@
 %include <head.h>
       
 #------------------------------------------------------------------------------------------#
-# !SCRIPT: run_pre
+# !SCRIPT: run_post
 #
 # !DESCRIPTION:
-#     Script to run the pre of MONAN model .
+#     Script to run the MONAN model post-processing - CONVERT_MPAS.
 #     
 #------------------------------------------------------------------------------------------#
 
-if [ ${HH} -lt "18" ]
+if [ ${HH} -gt "3" -a ${HH} -lt "18" ]
 then
    HHci="00"
 else
    HHci="12"
 fi
+
 
 # Input variables:-------------------------------------------------------------------------#
 EXP=%EXP%
@@ -26,23 +27,33 @@ FCST=%FCSTH%
 # Local variables:-------------------------------------------------------------------------#
 DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY1}/scripts_CD-CT
 MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
 #------------------------------------------------------------------------------------------#
 
 
 
 
-# Run the 2.pre_processing.bash script from scripts_CDCT oficial repo:---------------------#
+# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
 
-ecflow_client --label=Info "Running  2.pre_processing.bash"
+ecflow_client --label=Info "Running 4.run_post.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
 ecflow_client --label=VERSION "${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
-${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 
 #------------------------------------------------------------------------------------------#
 
 
+# Final data output directory:
+mkdir -p ${DIROUTPUT}/${YYYYMMDDHHi}/
+
+# Copy post:
+cp -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}/Post/* ${DIROUTPUT}/${YYYYMMDDHHi}/
+
+# Remove all output files from the original output diretory dataout:
+rm -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}
+rm -fr ${DIRSCRIPTSCDCT}/datain/${YYYYMMDDHHi}
 
 
 %include <tail.h>

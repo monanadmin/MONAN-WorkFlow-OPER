@@ -1,4 +1,4 @@
-suite MONAN_OPER
+suite MONAN_PRE_OPER
    defstatus suspended
 
    edit ECF_HOME "/mnt/beegfs/monan/users/renato/issues/ecflow-oper/MONAN-WorkFlow-OPER"
@@ -23,13 +23,13 @@ suite MONAN_OPER
          label VERSION "Version of model."
          
       task model
-         trigger /MONAN_OPER/MONAN/pre eq complete
+         trigger /MONAN_PRE_OPER/MONAN/pre eq complete
          label Info "MONAN Model."
          label date "YYYYMMDDHH"
          label VERSION "Version of Model"
          
       task post
-         trigger /MONAN_OPER/MONAN/model eq complete
+         trigger /MONAN_PRE_OPER/MONAN/model eq complete
          label Info "MONAN post-processing - Convert_MPAS"
          label date "YYYYMMDDHH"
          label VERSION "Version of Convert_MPAS"
