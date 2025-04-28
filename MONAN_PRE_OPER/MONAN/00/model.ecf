@@ -1,19 +1,16 @@
 %include <head.h>
       
 #------------------------------------------------------------------------------------------#
-# !SCRIPT: run_pre
+# !SCRIPT: run_model
 #
 # !DESCRIPTION:
-#     Script to run the pre of MONAN model .
+#     Script to run the MONAN model.
 #     
 #------------------------------------------------------------------------------------------#
 
-if [ ${HH} -gt "3" -a ${HH} -lt "18" ]
-then
-   HHci="00"
-else
-   HHci="12"
-fi
+
+HHci=%FAMILY1%
+
 
 # Input variables:-------------------------------------------------------------------------#
 EXP=%EXP%
@@ -24,21 +21,21 @@ FCST=%FCSTH%
 
 
 # Local variables:-------------------------------------------------------------------------#
-DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY1}/scripts_CD-CT
+DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
 MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
 #------------------------------------------------------------------------------------------#
 
 
 
 
-# Run the 2.pre_processing.bash script from scripts_CDCT oficial repo:---------------------#
+# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
 
-ecflow_client --label=Info "Running  2.pre_processing.bash"
+ecflow_client --label=Info "Running 3.run_model.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
 ecflow_client --label=VERSION "${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
-${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+${DIRSCRIPTSCDCT}/scripts/3.run_model.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 
 #------------------------------------------------------------------------------------------#
 

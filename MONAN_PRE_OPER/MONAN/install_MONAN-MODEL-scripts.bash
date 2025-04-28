@@ -12,9 +12,9 @@ if [ ! -d "scripts_CD-CT" ]; then
    git status | head -n 1
    git log -1
    cd scripts
-   1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
+   ./1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
 else
    cd scripts_CD-CT/scripts
-   1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
+   ./1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
 fi
 cat ../execs/VERSION.txt
