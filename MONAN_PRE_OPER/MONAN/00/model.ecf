@@ -22,7 +22,9 @@ FCST=%FCSTH%
 
 # Local variables:-------------------------------------------------------------------------#
 DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
-MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/MONAN-VERSION.txt)
+CMPASVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/CONVMPAS-VERSION.txt)
+SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 #------------------------------------------------------------------------------------------#
 
 
@@ -32,7 +34,7 @@ MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
 
 ecflow_client --label=Info "Running 3.run_model.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
-ecflow_client --label=VERSION "${MVERSION}"
+ecflow_client --label=VERSION "SCDCT:${SCDCTVERSION} / MONAN:${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
 ${DIRSCRIPTSCDCT}/scripts/3.run_model.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}

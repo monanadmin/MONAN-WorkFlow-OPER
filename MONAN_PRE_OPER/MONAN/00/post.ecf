@@ -21,7 +21,9 @@ FCST=%FCSTH%
 
 # Local variables:-------------------------------------------------------------------------#
 DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
-MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/VERSION.txt)
+MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/MONAN-VERSION.txt)
+CMPASVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/CONVMPAS-VERSION.txt)
+SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
 #------------------------------------------------------------------------------------------#
 
@@ -32,7 +34,7 @@ DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
 
 ecflow_client --label=Info "Running 4.run_post.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
-ecflow_client --label=VERSION "${MVERSION}"
+ecflow_client --label=VERSION "SCDCT:${SCDCTVERSION} / ConvMPAS:${CMPASVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
 ${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
