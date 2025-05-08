@@ -32,7 +32,7 @@ SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 
 ecflow_client --label=Info "Running  2.pre_processing.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
-ecflow_client --label=VERSION "SCDCT:${SCDCTVERSION} / MONAN:${MVERSION}"
+ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / MONAN:${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
 ${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}

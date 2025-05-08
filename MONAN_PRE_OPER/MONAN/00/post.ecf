@@ -34,7 +34,7 @@ DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
 
 ecflow_client --label=Info "Running 4.run_post.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
-ecflow_client --label=VERSION "SCDCT:${SCDCTVERSION} / ConvMPAS:${CMPASVERSION}"
+ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / ConvMPAS:${CMPASVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
 ${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
