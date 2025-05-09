@@ -1,0 +1,13 @@
+%include <head.h>
+      
+
+DIRHOME=${DIRSUITE}/<nome_da_suite>
+SCRIPTS=${DIRHOME}/scripts #; mkdir -p ${SCRIPTS}
+DATAOUT=${DIRHOME}/dataout #; mkdir -p ${DATAOUT}
+DATAIN=${DIRHOME}/datain #; mkdir -p ${DATAIN}
+
+ecflow_client --label=Info "Inicio... "
+
+%include <tail.h>
+# file is served by ecflow-server
+
