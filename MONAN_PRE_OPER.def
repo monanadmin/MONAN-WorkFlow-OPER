@@ -1,0 +1,66 @@
+suite MONAN_PRE_OPER
+   defstatus suspended
+
+   edit ECF_HOME "/mnt/beegfs/monan/users/renato/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER"
+   edit ECF_HOST "egeon-login.cptec.inpe.br"
+   edit ECF_INCLUDE "/mnt/beegfs/monan/users/renato/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER/includes"
+   edit ECF_TRIES "1"
+
+   
+
+   family MONAN
+   
+      family 00
+         cron 06:00
+         
+         edit EXP "GFS"
+         edit RES "1024002"
+         edit FCSTH "240"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_PRE_OPER/MONAN/00/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_PRE_OPER/MONAN/00/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+      
+      family 12
+         cron 18:00
+         
+         edit EXP "GFS"
+         edit RES "1024002"
+         edit FCSTH "120"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_PRE_OPER/MONAN/12/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_PRE_OPER/MONAN/12/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+         
+   endfamily      
+      
+      
+endsuite
