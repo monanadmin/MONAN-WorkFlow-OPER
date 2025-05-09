@@ -51,7 +51,7 @@ export FAMILY1=%FAMILY1%
 export SUITE=%SUITE%
 export DIRSUITE=%ECF_HOME%
 export HH=$(echo "%ECF_TIME%" | cut -d: -f1)
-
+export DIRFLUSHOUT=/mnt/beegfs/monan/users/renato/issues/trashout
 
 
 echo ""

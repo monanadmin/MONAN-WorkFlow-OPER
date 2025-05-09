@@ -24,7 +24,7 @@ DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
 MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/MONAN-VERSION.txt)
 CMPASVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/CONVMPAS-VERSION.txt)
 SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
-DIROUTPUT=/mnt/beegfs/monan/users/renato/issues/trashout
+DIROUTPUT=${DIRFLUSHOUT}
 #------------------------------------------------------------------------------------------#
 
 
