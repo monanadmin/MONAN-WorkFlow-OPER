@@ -20,9 +20,8 @@ FCST=%FCSTH%
 
 
 # Local variables:-------------------------------------------------------------------------#
-DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
-MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/MONAN-VERSION.txt)
-CMPASVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/CONVMPAS-VERSION.txt)
+MVERSION=$(cat ${DIRSCRIPTDADOS}/execs/MONAN-VERSION.txt)
+CMPASVERSION=$(cat ${DIRSCRIPTDADOS}/execs/CONVMPAS-VERSION.txt)
 SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 DIROUTPUT=${DIRFLUSHOUT}
 #------------------------------------------------------------------------------------------#
