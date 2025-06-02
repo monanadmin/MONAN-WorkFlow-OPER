@@ -46,12 +46,19 @@ trap '{ echo "Killed by a signal"; ERROR ; }' 1 2 3 4 5 6 7 8 10 12 13 15
 #
 #  Exports de datas/dirs importantes
 #
+## Output directories:-----------------------------------------------------------------------------------
+export DIR_DADOS=/mnt/beegfs/monan/users/renato/issues/ecflow-PREOPER/SCRATCHOUT; mkdir -p ${DIR_DADOS}
+export DIRFLUSHOUT=/mnt/beegfs/monan/users/renato/issues/trashout; mkdir -p ${DIRFLUSHOUT}
+#-------------------------------------------------------------------------------
+
+# Other vars:
 export FAMILY=%FAMILY%
 export FAMILY1=%FAMILY1%
 export SUITE=%SUITE%
 export DIRSUITE=%ECF_HOME%
 export HH=$(echo "%ECF_TIME%" | cut -d: -f1)
-export DIRFLUSHOUT=/mnt/beegfs/monan/users/renato/issues/trashout
+export DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
+export DIRSCRIPTDADOS=${DIR_DADOS}/scripts_CD-CT
 
 
 echo ""

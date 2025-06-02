@@ -11,7 +11,7 @@ suite MONAN_PRE_OPER
    family MONAN
    
       family 00
-         cron 06:00
+         cron 05:55
          
          edit EXP "GFS"
          edit RES "1024002"
@@ -36,7 +36,7 @@ suite MONAN_PRE_OPER
       endfamily
       
       family 12
-         cron 18:00
+         cron 17:55
          
          edit EXP "GFS"
          edit RES "1024002"
