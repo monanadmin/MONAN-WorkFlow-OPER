@@ -61,8 +61,8 @@ cat install_MONAN-MODEL-scripts.bash
 These vars are important to check:
 ~~~
 SCRIPTSCDCT_VERSION=1.3.0
-MONAN_VERSION=1.4.0-rc
-CONVERT_MPAS_VERSION=1.1.0
+MONAN_VERSION=1.4.1-rc
+CONVERT_MPAS_VERSION=1.2.0
 ~~~
 Now you can run it:
 ~~~
