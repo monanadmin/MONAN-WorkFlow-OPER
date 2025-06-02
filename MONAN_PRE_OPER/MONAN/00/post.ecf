@@ -20,11 +20,9 @@ FCST=%FCSTH%
 
 
 # Local variables:-------------------------------------------------------------------------#
-DIRSCRIPTSCDCT=${DIRSUITE}/${SUITE}/${FAMILY}/../scripts_CD-CT
-MVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/MONAN-VERSION.txt)
-CMPASVERSION=$(cat ${DIRSCRIPTSCDCT}/execs/CONVMPAS-VERSION.txt)
+MVERSION=$(cat ${DIRSCRIPTDADOS}/execs/MONAN-VERSION.txt)
+CMPASVERSION=$(cat ${DIRSCRIPTDADOS}/execs/CONVMPAS-VERSION.txt)
 SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
-DIROUTPUT=${DIRFLUSHOUT}
 #------------------------------------------------------------------------------------------#
 
 
@@ -43,15 +41,14 @@ ${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 
 
 # Final data output directory:
-mkdir -p ${DIROUTPUT}/${YYYYMMDDHHi}/
+mkdir -p ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
 
 # Copy post:
-cp -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}/Post/* ${DIROUTPUT}/${YYYYMMDDHHi}/
+cp -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}/Post/* ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
 
 # Remove all output files from the original output diretory dataout:
-rm -fr ${DIRSCRIPTSCDCT}/dataout/${YYYYMMDDHHi}
-rm -fr ${DIRSCRIPTSCDCT}/datain/${YYYYMMDDHHi}
-
+rm -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}
+rm -fr ${DIRSCRIPTDADOS}/datain/${YYYYMMDDHHi}
 
 %include <tail.h>
 # file is served by ecflow-server
