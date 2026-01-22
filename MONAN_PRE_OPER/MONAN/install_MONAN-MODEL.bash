@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SCRIPTSCDCT_VERSION=release/1.3.0
-MONAN_VERSION=release/1.4.1-rc
-CONVERT_MPAS_VERSION=1.1.0
+SCRIPTSCDCT_VERSION=1.4.0
+MONAN_VERSION=1.4.3-rc
+CONVERT_MPAS_VERSION=1.2.0
 
 if [ ! -d "scripts_CD-CT" ]; then
    echo "instalando scripts..."

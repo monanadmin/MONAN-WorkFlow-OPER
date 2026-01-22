@@ -1,6 +1,6 @@
 #!/bin/ksh
 
-export ECF_PORT=1735
+export ECF_PORT=<numero_porta_server>
 export LC_ALL="en_US.utf-8"
 
 

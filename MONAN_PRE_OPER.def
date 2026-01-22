@@ -1,9 +1,9 @@
 suite MONAN_PRE_OPER
    defstatus suspended
 
-   edit ECF_HOME "/mnt/beegfs/monan/users/renato/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER"
-   edit ECF_HOST "egeon-login.cptec.inpe.br"
-   edit ECF_INCLUDE "/mnt/beegfs/monan/users/renato/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER/includes"
+   edit ECF_HOME "<dir_install_workflow_oper> - e.g. /mnt/beegfs/monan/users/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER"
+   edit ECF_HOST "<hostname_ecflow_host> - e.g. egeon-login.cptec.inpe.br"
+   edit ECF_INCLUDE "<dir_includes_workflow_oper> - e.g. /mnt/beegfs/monan/users/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER/includes"
    edit ECF_TRIES "1"
 
    
@@ -11,11 +11,11 @@ suite MONAN_PRE_OPER
    family MONAN
    
       family 00
-         cron 05:55
+         cron 06:00
          
          edit EXP "GFS"
-         edit RES "1024002"
-         edit FCSTH "240"
+         edit RES "5898242"
+         edit FCSTH "264"
          
          task pre
             label Info "MONAN pre-processing."
@@ -36,10 +36,10 @@ suite MONAN_PRE_OPER
       endfamily
       
       family 12
-         cron 17:55
+         cron 18:00
          
          edit EXP "GFS"
-         edit RES "1024002"
+         edit RES "5898242"
          edit FCSTH "120"
          
          task pre
