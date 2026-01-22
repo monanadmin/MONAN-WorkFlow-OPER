@@ -10,7 +10,7 @@ if [ ! -d "scripts_CD-CT" ]; then
    cd scripts_CD-CT
    git checkout ${SCRIPTSCDCT_VERSION}
    git status | head -n 1
-   git log -1
+   git log -1 | head -n 1
    cd scripts
    ./1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
 else

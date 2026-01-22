@@ -1,20 +1,20 @@
 # MONAN-WorkFlow-OPER
-Work flow scripts for operational ECFLOW suite.
+Work flow scripts for operational ecFlow suite.
 
 
 ### History
 
-0.2.0 - Version compatible with the Jaci supercomputer and the MONAN Model 1.4.3-rc.
-0.1.0 - First version compatible with the Egeon cluster.
+- 0.2.0 - Version compatible with the Jaci supercomputer and the MONAN Model 1.4.3-rc.
+- 0.1.0 - First version compatible with the Egeon cluster.
 
 
 ### How to install MONAN-WorkFlow-Oper for the very first time?
 
 1. Clone the WorkFlow-Oper repository into your work directory, and ask for your tag:
 ~~~
-git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
-cd MONAN-WorkFlow-OPER
-git checkout 0.2.0
+$ git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
+$ cd MONAN-WorkFlow-OPER
+$ git checkout 0.2.0
 ~~~
 Then you will get the follow directories and scripts struct:
 ~~~
@@ -48,29 +48,27 @@ Then you will get the follow directories and scripts struct:
 
 2. Put your root work-directory and host name machine in the `MONAN_PRE_OPER.def` :
 ~~~
-cd MONAN-WorkFlow-OPER
-vi MONAN_PRE_OPER.def
-~~~
-~~~
+$ cd MONAN-WorkFlow-OPER
+$ vi MONAN_PRE_OPER.def
+
 edit ECF_HOME "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER"
 edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
 edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
 ~~~
 ~~~
-vi includes/head.h
-~~~
-~~~
+$ vi includes/head.h
+
 ## Output directories:-----------------------------------------------------------------------------------
 export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN; mkdir -p ${DIR_DADOS}
-export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_ouput_dir>; mkdir -p ${DIRFLUSHOUT}
+export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_output_dir>; mkdir -p ${DIRFLUSHOUT}
 #-------------------------------------------------------------------------------
 ~~~
 
 3. Now, you must install the `scritps_CD-CT` and MONAN model repositories. The `install_MONAN-MODEL-scripts.bash` will do it in the right place automatically.
 Before run it, check if the `scritps_CD-CT`, MONAN-Model and Convert_MPAS versions are the same you suppose to use:
 ~~~
-cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
-cat install_MONAN-MODEL-scripts.bash
+$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ cat install_MONAN-MODEL.bash
 ~~~
 These vars are important to check:
 ~~~
@@ -80,8 +78,8 @@ CONVERT_MPAS_VERSION=1.2.0
 ~~~
 Now you can run it:
 ~~~
-cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
-./install_MONAN-MODEL-scripts.bash
+$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ ./install_MONAN-MODEL.bash
 ~~~
 
 4. After this step, you should get the scripts_CD-CT installed and the MONAN-Model installed and compiled:

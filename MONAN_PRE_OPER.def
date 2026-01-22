@@ -1,9 +1,9 @@
 suite MONAN_PRE_OPER
    defstatus suspended
 
-   edit ECF_HOME "<dir_install_workflow_oper> - e.g. /mnt/beegfs/monan/users/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER"
-   edit ECF_HOST "<hostname_ecflow_host> - e.g. egeon-login.cptec.inpe.br"
-   edit ECF_INCLUDE "<dir_includes_workflow_oper> - e.g. /mnt/beegfs/monan/users/issues/ecflow-PREOPER/MONAN-WorkFlow-OPER/includes"
+   edit ECF_HOME "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER"
+   edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
+   edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
    edit ECF_TRIES "1"
 
    
