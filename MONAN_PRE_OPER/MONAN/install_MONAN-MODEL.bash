@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SCRIPTSCDCT_VERSION=release/1.3.0
-MONAN_VERSION=release/1.4.1-rc
-CONVERT_MPAS_VERSION=1.1.0
+SCRIPTSCDCT_VERSION=1.4.0
+MONAN_VERSION=1.4.3-rc
+CONVERT_MPAS_VERSION=1.2.0
 
 if [ ! -d "scripts_CD-CT" ]; then
    echo "instalando scripts..."
@@ -10,7 +10,7 @@ if [ ! -d "scripts_CD-CT" ]; then
    cd scripts_CD-CT
    git checkout ${SCRIPTSCDCT_VERSION}
    git status | head -n 1
-   git log -1
+   git log -1 | head -n 1
    cd scripts
    ./1.install_monan.bash https://github.com/monanadmin/MONAN-Model.git ${MONAN_VERSION} ${CONVERT_MPAS_VERSION}
 else

@@ -1,15 +1,20 @@
 # MONAN-WorkFlow-OPER
-Work flow scripts for operational ECFLOW suite.
+Work flow scripts for operational ecFlow suite.
 
+
+### History
+
+- 0.2.0 - Version compatible with the Jaci supercomputer and the MONAN Model 1.4.3-rc.
+- 0.1.0 - First version compatible with the Egeon cluster.
 
 
 ### How to install MONAN-WorkFlow-Oper for the very first time?
 
 1. Clone the WorkFlow-Oper repository into your work directory, and ask for your tag:
 ~~~
-git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
-cd MONAN-WorkFlow-OPER
-git checkout 0.1.0
+$ git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
+$ cd MONAN-WorkFlow-OPER
+$ git checkout 0.2.0
 ~~~
 Then you will get the follow directories and scripts struct:
 ~~~
@@ -30,9 +35,9 @@ Then you will get the follow directories and scripts struct:
 |   |-- README.md
 |   |-- VERSION.txt
 |   |-- eclogs
-|   |   |-- egeon-login.cptec.inpe.br.1735.ecf.check
-|   |   |-- egeon-login.cptec.inpe.br.1735.ecf.check.b
-|   |   |-- egeon-login.cptec.inpe.br.1735.ecf.log
+|   |   |-- inicializadef.bash
+|   |   |-- deletadef.bash
+|   |   |-- atualizadef.bash
 |   |   |-- start.ksh
 |   |   |-- stop.ksh
 |   |   `-- template.ecf
@@ -43,31 +48,38 @@ Then you will get the follow directories and scripts struct:
 
 2. Put your root work-directory and host name machine in the `MONAN_PRE_OPER.def` :
 ~~~
-cd MONAN-WorkFlow-OPER
-vi MONAN_PRE_OPER.def
+$ cd MONAN-WorkFlow-OPER
+$ vi MONAN_PRE_OPER.def
+
+edit ECF_HOME "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER"
+edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
+edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
 ~~~
 ~~~
-edit ECF_HOME "/mnt/beegfs/<your_root_work_dir>/MONAN-WorkFlow-OPER"
-edit ECF_HOST "<your_host_name>.cptec.inpe.br"
-edit ECF_INCLUDE "/mnt/beegfs/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
+$ vi includes/head.h
+
+## Output directories:-----------------------------------------------------------------------------------
+export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN; mkdir -p ${DIR_DADOS}
+export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_output_dir>; mkdir -p ${DIRFLUSHOUT}
+#-------------------------------------------------------------------------------
 ~~~
 
 3. Now, you must install the `scritps_CD-CT` and MONAN model repositories. The `install_MONAN-MODEL-scripts.bash` will do it in the right place automatically.
 Before run it, check if the `scritps_CD-CT`, MONAN-Model and Convert_MPAS versions are the same you suppose to use:
 ~~~
-cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
-cat install_MONAN-MODEL-scripts.bash
+$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ cat install_MONAN-MODEL.bash
 ~~~
 These vars are important to check:
 ~~~
-SCRIPTSCDCT_VERSION=1.3.0
-MONAN_VERSION=1.4.1-rc
+SCRIPTSCDCT_VERSION=1.4.0
+MONAN_VERSION=1.4.3-rc
 CONVERT_MPAS_VERSION=1.2.0
 ~~~
 Now you can run it:
 ~~~
-cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
-./install_MONAN-MODEL-scripts.bash
+$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ ./install_MONAN-MODEL.bash
 ~~~
 
 4. After this step, you should get the scripts_CD-CT installed and the MONAN-Model installed and compiled:
@@ -81,7 +93,7 @@ The MONAN scripts to run manually are here: `MONAN-WorkFlow-OPER/MONAN_PRE_OPER/
 
 The MONAN source are installed and compiled into the `scripts_CD-CD/sources` dir:  `MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts`:
 ~~~
-MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/sources/MONAN-Model_1.3.1-rc
+MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/sources/MONAN-Model_1.4.3-rc
 ~~~
 
 All the executables are available in the `scripts_CD-CD/execs` :  
@@ -103,24 +115,32 @@ This vrsions are showed in the `VERSION` EcFlow label info field.
 
 5. After all these steps, you can adjust your `ECF_PORT` and start your ECFlow suite `MONAN_PRE_OPER.def`.
 
+We have some scripts that help with this task and are located in the 'eclogs' folder. To use them, update the 'ecflow server port' within these scripts.
+
 ### How to confiurate the MONAN forecasts profile?
 
-1. All SLURM configuratinos are in the `setenv.bash` script for each phase of MONAN:
+1. The main settings are in the `setenv` files.
+
 ~~~
 MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts/setenv.bash
 ~~~
 
-For example, if you want to change the number of MPI tasks (cores) or cores per nodes for the MODEL phase, such as al others SLURM options, you can change on it:
+This file contains the COMPILER variable, which can be changed to other compilers on the Jaci supercomputer, on egeon, it is set to the GNU default. It also differentiates between compilation tags and the SLURM and PBS submission environment.
+
 ~~~
-# Model phase:
-export MODEL_QUEUE="batch"
-export MODEL_ncores=512
-export MODEL_nnodes=8
-export MODEL_ncpn=64
-export MODEL_jobname="Model.MONAN"
-export MODEL_walltime="8:00:00"
+MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts/stools/setenv_PBS_ian_intel.bash
 ~~~
 
+In this file, we can change the number of nodes and MPI Tasks or cores per nodes for the MODEL phase and submission queue, example in PBS (Jaci supercomputer) during the model execution phase:
+
+~~~
+# Model phase:
+export MODEL_QUEUE="oper"
+export MODEL_ncores=8192
+export MODEL_nnodes=32
+export MODEL_ncpus=256
+export MODEL_ncpn=256
+~~~
 
 
 Done! 
@@ -128,6 +148,5 @@ Done!
 You are ready to operate you suite MONAN. Enjoy it! 
 
 
-If you have any problems with this suite operation, or suggestions/colaborations, please let us know:
+If you have any problems with this suite operation, or suggestions/colaborations, please let us know.
 
-gcc.dimnt@inpe.br
