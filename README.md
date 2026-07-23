@@ -1,9 +1,11 @@
 # MONAN-WorkFlow-OPER
-Work flow scripts for operational ecFlow suite.
+
+Work flow scripts ifor operational ecFlow suite.
 
 
 ### History
 
+- 0.3.0 - New suite 'MONAN_ATM_REGIONAL' and compatible with MONAN Model 1.4.4.
 - 0.2.0 - Version compatible with the Jaci supercomputer and the MONAN Model 1.4.3-rc.
 - 0.1.0 - First version compatible with the Egeon cluster.
 
@@ -14,13 +16,13 @@ Work flow scripts for operational ecFlow suite.
 ~~~
 $ git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
 $ cd MONAN-WorkFlow-OPER
-$ git checkout 0.2.0
+$ git checkout 0.3.0
 ~~~
 Then you will get the follow directories and scripts struct:
 ~~~
 |-- MONAN-WorkFlow-OPER
 |   |-- LICENSE
-|   |-- MONAN_PRE_OPER
+|   |-- MONAN_ATM_GLOBAL
 |   |   `-- MONAN
 |   |       |-- 00
 |   |       |   |-- model.ecf
@@ -30,8 +32,28 @@ Then you will get the follow directories and scripts struct:
 |   |       |   |-- model.ecf -> ../00/model.ecf
 |   |       |   |-- post.ecf -> ./00/post.ecf
 |   |       |   |-- pre.ecf -> ../00/pre.ecf
-|   |       |-- install_MONAN-MODEL-scripts.bash
-|   |-- MONAN_PRE_OPER.def
+|   |       |-- install_MONAN-MODEL.bash
+|   |-- MONAN_ATM_REGIONAL
+|   |   `-- MONAN
+|   |       |-- 00
+|   |       |   |-- model.ecf
+|   |       |   |-- post.ecf
+|   |       |   |-- pre.ecf
+|   |       |-- 06
+|   |       |   |-- model.ecf -> ../00/model.ecf
+|   |       |   |-- post.ecf -> ./00/post.ecf
+|   |       |   |-- pre.ecf -> ../00/pre.ecf
+|   |       |-- 12
+|   |       |   |-- model.ecf -> ../00/model.ecf
+|   |       |   |-- post.ecf -> ./00/post.ecf
+|   |       |   |-- pre.ecf -> ../00/pre.ecf
+|   |       |-- 18
+|   |       |   |-- model.ecf -> ../00/model.ecf
+|   |       |   |-- post.ecf -> ./00/post.ecf
+|   |       |   |-- pre.ecf -> ../00/pre.ecf
+|   |       |-- install_MONAN-MODEL.bash
+|   |-- MONAN_ATM_GLOBAL.def
+|   |-- MONAN_ATM_REGIONAL.def
 |   |-- README.md
 |   |-- VERSION.txt
 |   |-- eclogs
@@ -42,24 +64,25 @@ Then you will get the follow directories and scripts struct:
 |   |   |-- stop.ksh
 |   |   `-- template.ecf
 |   `-- includes
-|       |-- head.h
+|       |-- head_atm_global.h
+|       |-- head_atm_regional.h
 |       `-- tail.h
 ~~~
 
 2. Put your root work-directory and host name machine in the `MONAN_PRE_OPER.def` :
 ~~~
 $ cd MONAN-WorkFlow-OPER
-$ vi MONAN_PRE_OPER.def
+$ vi MONAN_ATM_GLOBAL.def | MONAN_ATM_REGIONAL.def
 
 edit ECF_HOME "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER"
 edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
 edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
 ~~~
 ~~~
-$ vi includes/head.h
+$ vi includes/head_global.h | head_regional.h
 
 ## Output directories:-----------------------------------------------------------------------------------
-export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN; mkdir -p ${DIR_DADOS}
+export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN; mkdir -p ${DIR_DADOS}
 export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_output_dir>; mkdir -p ${DIRFLUSHOUT}
 #-------------------------------------------------------------------------------
 ~~~
@@ -67,38 +90,35 @@ export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_outp
 3. Now, you must install the `scritps_CD-CT` and MONAN model repositories. The `install_MONAN-MODEL-scripts.bash` will do it in the right place automatically.
 Before run it, check if the `scritps_CD-CT`, MONAN-Model and Convert_MPAS versions are the same you suppose to use:
 ~~~
-$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ cd MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN
 $ cat install_MONAN-MODEL.bash
 ~~~
 These vars are important to check:
 ~~~
-SCRIPTSCDCT_VERSION=1.4.0
-MONAN_VERSION=1.4.3-rc
+SCRIPTSCDCT_VERSION=1.4.1
+MONAN_VERSION=1.4.4
 CONVERT_MPAS_VERSION=1.2.0
 ~~~
 Now you can run it:
 ~~~
-$ cd MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN
+$ cd MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL | REGIONAL>/MONAN
 $ ./install_MONAN-MODEL.bash
 ~~~
 
 4. After this step, you should get the scripts_CD-CT installed and the MONAN-Model installed and compiled:
 
-The MONAN scripts to run manually are here: `MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts`, please check it:
+The MONAN scripts to run manually are here: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts`, please check it:
 ~~~
 2.pre_processing.bash (to run the pre-processing)
 3.run_model.bash (to run the model)
 4.run_post.bash (to run the post-processing)
 ~~~
 
-The MONAN source are installed and compiled into the `scripts_CD-CD/sources` dir:  `MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts`:
-~~~
-MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/sources/MONAN-Model_1.4.3-rc
-~~~
+The MONAN source are installed and compiled into the `scripts_CD-CD/sources` dir: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/sources/MONAN-Model_X.Y.Z`:
 
 All the executables are available in the `scripts_CD-CD/execs` :  
 ~~~
-MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/execs: 
+MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/execs: 
 build_tables
 atmosphere_model     (Model main executable)
 init_atmosphere_model  (pre-processing executable)
@@ -121,17 +141,27 @@ We have some scripts that help with this task and are located in the 'eclogs' fo
 
 1. The main settings are in the `setenv` files.
 
+1.1. setenv.bash
+
 ~~~
-MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts/setenv.bash
+MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts/setenv.bash
 ~~~
 
 This file contains the COMPILER variable, which can be changed to other compilers on the Jaci supercomputer, on egeon, it is set to the GNU default. It also differentiates between compilation tags and the SLURM and PBS submission environment.
 
+To run MONAN Regional, change the global variable MODERUN from G to R in the MONAN_ATM_REGIONAL folder.
+
 ~~~
-MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN/scripts_CD-CT/scripts/stools/setenv_PBS_ian_intel.bash
+export MODERUN=G 
 ~~~
 
-In this file, we can change the number of nodes and MPI Tasks or cores per nodes for the MODEL phase and submission queue, example in PBS (Jaci supercomputer) during the model execution phase:
+1.2. setenv_SCHEDULER_HOST_COMPILER_.bash
+
+~~~
+MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts/stools/setenv_PBS_ian_intel.bash
+~~~
+
+In this file, we can change the number of nodes and MPI Tasks or cores per nodes for the MODEL (and others) stage and submission queue, example in PBS (Jaci supercomputer) during the model execution phase:
 
 ~~~
 # Model phase:
@@ -143,10 +173,6 @@ export MODEL_ncpn=256
 ~~~
 
 
-Done! 
+Done, you are ready to operate you suite MONAN witch ecFlow.
 
-You are ready to operate you suite MONAN. Enjoy it! 
-
-
-If you have any problems with this suite operation, or suggestions/colaborations, please let us know.
 

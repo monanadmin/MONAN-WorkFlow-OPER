@@ -47,7 +47,7 @@ trap '{ echo "Killed by a signal"; ERROR ; }' 1 2 3 4 5 6 7 8 10 12 13 15
 #  Exports de datas/dirs importantes
 #
 ## Output directories:-----------------------------------------------------------------------------------
-export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/MONAN_PRE_OPER/MONAN; mkdir -p ${DIR_DADOS}
+export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/MONAN_ATM_GLOBAL/MONAN; mkdir -p ${DIR_DADOS}
 export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_output_dir>; mkdir -p ${DIRFLUSHOUT}
 #-------------------------------------------------------------------------------
 

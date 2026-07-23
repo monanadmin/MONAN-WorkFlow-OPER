@@ -1,15 +1,14 @@
-%include <head.h>
+%include <head_atm_global.h>
       
 #------------------------------------------------------------------------------------------#
-# !SCRIPT: run_post
+# !SCRIPT: run_pre
 #
 # !DESCRIPTION:
-#     Script to run the MONAN model post-processing - CONVERT_MPAS.
+#     Script to run the pre of MONAN model .
 #     
 #------------------------------------------------------------------------------------------#
 
 HHci=%FAMILY1%
-
 
 # Input variables:-------------------------------------------------------------------------#
 EXP=%EXP%
@@ -28,27 +27,19 @@ SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 
 
 
-# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
+# Run the 2.pre_processing.bash script from scripts_CDCT oficial repo:---------------------#
 
-ecflow_client --label=Info "Running 4.run_post.bash"
+ecflow_client --label=Info "Running  2.pre_processing.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
-ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / ConvMPAS:${CMPASVERSION}"
+ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / MONAN:${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
-${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 
 #------------------------------------------------------------------------------------------#
 
 
-# Final data output directory:
-mkdir -p ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
 
-# Copy post:
-cp -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}/Post/* ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
-
-# Remove all output files from the original output diretory dataout:
-rm -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}
-rm -fr ${DIRSCRIPTDADOS}/datain/${YYYYMMDDHHi}
 
 %include <tail.h>
 # file is served by ecflow-server

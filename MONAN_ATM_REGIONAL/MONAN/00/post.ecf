@@ -1,0 +1,54 @@
+%include <head_atm_regional.h>
+      
+#------------------------------------------------------------------------------------------#
+# !SCRIPT: run_post
+#
+# !DESCRIPTION:
+#     Script to run the MONAN model post-processing - CONVERT_MPAS.
+#     
+#------------------------------------------------------------------------------------------#
+
+HHci=%FAMILY1%
+
+
+# Input variables:-------------------------------------------------------------------------#
+EXP=%EXP%
+RES=%RES%
+YYYYMMDDHHi=%YYYY%%MM%%DD%${HHci}
+FCST=%FCSTH%
+#------------------------------------------------------------------------------------------#
+
+
+# Local variables:-------------------------------------------------------------------------#
+MVERSION=$(cat ${DIRSCRIPTDADOS}/execs/MONAN-VERSION.txt)
+CMPASVERSION=$(cat ${DIRSCRIPTDADOS}/execs/CONVMPAS-VERSION.txt)
+SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
+#------------------------------------------------------------------------------------------#
+
+
+
+
+# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
+
+ecflow_client --label=Info "Running 4.run_post.bash"
+ecflow_client --label=date "${YYYYMMDDHHi}"
+ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / ConvMPAS:${CMPASVERSION}"
+
+cd ${DIRSCRIPTSCDCT}/scripts
+${DIRSCRIPTSCDCT}/scripts/4.run_post.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+
+#------------------------------------------------------------------------------------------#
+
+
+# Final data output directory:
+mkdir -p ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
+
+# Copy post:
+cp -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}/Post/* ${DIRFLUSHOUT}/${YYYYMMDDHHi}/
+
+# Remove all output files from the original output diretory dataout:
+rm -fr ${DIRSCRIPTDADOS}/dataout/${YYYYMMDDHHi}
+rm -fr ${DIRSCRIPTDADOS}/datain/${YYYYMMDDHHi}
+
+%include <tail.h>
+# file is served by ecflow-server

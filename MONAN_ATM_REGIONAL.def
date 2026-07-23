@@ -1,0 +1,115 @@
+suite MONAN_ATM_REGIONAL
+   defstatus suspended
+
+   edit ECF_HOME "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER"
+   edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
+   edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
+   edit ECF_TRIES "1"
+   
+
+   family MONAN
+   
+      family 00
+         cron 04:40
+         
+         edit EXP "GFS"
+         edit RES "23592962.REG.AMS_CAR"
+         edit FCSTH "120"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_ATM_REGIONAL/MONAN/00/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_ATM_REGIONAL/MONAN/00/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+      
+      family 06
+         cron 11:00
+         
+         edit EXP "GFS"
+         edit RES "23592962.REG.AMS_CAR"
+         edit FCSTH "36"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_ATM_REGIONAL/MONAN/06/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_ATM_REGIONAL/MONAN/06/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+      
+      family 12
+         cron 17:10
+         
+         edit EXP "GFS"
+         edit RES "23592962.REG.AMS_CAR"
+         edit FCSTH "72"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_ATM_REGIONAL/MONAN/12/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_ATM_REGIONAL/MONAN/12/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+
+      family 18
+         cron 22:30
+         
+         edit EXP "GFS"
+         edit RES "23592962.REG.AMS_CAR"
+         edit FCSTH "36"
+         
+         task pre
+            label Info "MONAN pre-processing."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of model."
+         
+         task model
+            trigger /MONAN_ATM_REGIONAL/MONAN/18/pre eq complete
+            label Info "MONAN Model."
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Model"
+         
+         task post
+            trigger /MONAN_ATM_REGIONAL/MONAN/18/model eq complete
+            label Info "MONAN post-processing - Convert_MPAS"
+            label date "YYYYMMDDHH"
+            label VERSION "Version of Convert_MPAS"
+      endfamily
+
+   endfamily
+   
+      
+endsuite

@@ -1,14 +1,16 @@
-%include <head.h>
+%include <head_atm_regional.h>
       
 #------------------------------------------------------------------------------------------#
-# !SCRIPT: run_pre
+# !SCRIPT: run_model
 #
 # !DESCRIPTION:
-#     Script to run the pre of MONAN model .
+#     Script to run the MONAN model.
 #     
 #------------------------------------------------------------------------------------------#
 
+
 HHci=%FAMILY1%
+
 
 # Input variables:-------------------------------------------------------------------------#
 EXP=%EXP%
@@ -27,14 +29,14 @@ SCDCTVERSION=$(cat ${DIRSCRIPTSCDCT}/VERSION.txt)
 
 
 
-# Run the 2.pre_processing.bash script from scripts_CDCT oficial repo:---------------------#
+# Run the 3.run_model.bash script from scripts_CDCT oficial repo:---------------------#
 
-ecflow_client --label=Info "Running  2.pre_processing.bash"
+ecflow_client --label=Info "Running 3.run_model.bash"
 ecflow_client --label=date "${YYYYMMDDHHi}"
 ecflow_client --label=VERSION "ScDCT:${SCDCTVERSION} / MONAN:${MVERSION}"
 
 cd ${DIRSCRIPTSCDCT}/scripts
-${DIRSCRIPTSCDCT}/scripts/2.pre_processing.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
+${DIRSCRIPTSCDCT}/scripts/3.run_model.bash ${EXP} ${RES} ${YYYYMMDDHHi} ${FCST}
 
 #------------------------------------------------------------------------------------------#
 
