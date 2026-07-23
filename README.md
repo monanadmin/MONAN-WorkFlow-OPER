@@ -1,18 +1,19 @@
 # MONAN-WorkFlow-OPER
 
-Work flow scripts ifor operational ecFlow suite.
+Workflow scripts for operational ecFlow suites.
 
 
-### History
+## History
 
 - 0.3.0 - New suite 'MONAN_ATM_REGIONAL' and compatible with MONAN Model 1.4.4.
 - 0.2.0 - Version compatible with the Jaci supercomputer and the MONAN Model 1.4.3-rc.
 - 0.1.0 - First version compatible with the Egeon cluster.
 
 
-### How to install MONAN-WorkFlow-Oper for the very first time?
+## How to install MONAN-WorkFlow-Oper
 
-1. Clone the WorkFlow-Oper repository into your work directory, and ask for your tag:
+### 1. Clone the WorkFlow-Oper repository into your work directory, and ask for your tag:
+
 ~~~
 $ git clone https://github.com/monanadmin/MONAN-WorkFlow-OPER.git
 $ cd MONAN-WorkFlow-OPER
@@ -69,7 +70,8 @@ Then you will get the follow directories and scripts struct:
 |       `-- tail.h
 ~~~
 
-2. Put your root work-directory and host name machine in the `MONAN_PRE_OPER.def` :
+### 2. Put your root work-directory and host name machine in the `MONAN_PRE_OPER.def`:
+
 ~~~
 $ cd MONAN-WorkFlow-OPER
 $ vi MONAN_ATM_GLOBAL.def | MONAN_ATM_REGIONAL.def
@@ -79,7 +81,7 @@ edit ECF_HOST "<your_ecf_host_name>.cptec.inpe.br"
 edit ECF_INCLUDE "/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/includes"
 ~~~
 ~~~
-$ vi includes/head_global.h | head_regional.h
+$ vi includes/head_atm_global.h | head_atm_regional.h
 
 ## Output directories:-----------------------------------------------------------------------------------
 export DIR_DADOS=/<lustre_or_beegfs_root>/<your_root_work_dir>/MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN; mkdir -p ${DIR_DADOS}
@@ -87,8 +89,9 @@ export DIRFLUSHOUT=/<lustre_or_beegfs_root>/<your_root_work_dir>/<any_final_outp
 #-------------------------------------------------------------------------------
 ~~~
 
-3. Now, you must install the `scritps_CD-CT` and MONAN model repositories. The `install_MONAN-MODEL-scripts.bash` will do it in the right place automatically.
+### 3. Now, you must install the `scritps_CD-CT` and MONAN model repositories. The `install_MONAN-MODEL-scripts.bash` will do it in the right place automatically.
 Before run it, check if the `scritps_CD-CT`, MONAN-Model and Convert_MPAS versions are the same you suppose to use:
+
 ~~~
 $ cd MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN
 $ cat install_MONAN-MODEL.bash
@@ -105,7 +108,7 @@ $ cd MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL | REGIONAL>/MONAN
 $ ./install_MONAN-MODEL.bash
 ~~~
 
-4. After this step, you should get the scripts_CD-CT installed and the MONAN-Model installed and compiled:
+### 4. After this step, you should get the scripts_CD-CT installed and the MONAN-Model installed and compiled:
 
 The MONAN scripts to run manually are here: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts`, please check it:
 ~~~
@@ -114,9 +117,9 @@ The MONAN scripts to run manually are here: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOB
 4.run_post.bash (to run the post-processing)
 ~~~
 
-The MONAN source are installed and compiled into the `scripts_CD-CD/sources` dir: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/sources/MONAN-Model_X.Y.Z`:
+The MONAN source are installed and compiled into the `scripts_CD-CT/sources` dir: `MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/sources/MONAN-Model_1.4.4`:
 
-All the executables are available in the `scripts_CD-CD/execs` :  
+All the executables are available in the `scripts_CD-CT/execs` :
 ~~~
 MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/execs: 
 build_tables
@@ -133,15 +136,15 @@ CONVMPAS-VERSION.txt
 ~~~
 This vrsions are showed in the `VERSION` EcFlow label info field.
 
-5. After all these steps, you can adjust your `ECF_PORT` and start your ECFlow suite `MONAN_PRE_OPER.def`.
+### 5. After all these steps, you can adjust your `ECF_PORT` and start your ECFlow suite `MONAN_ATM_GLOBAL.def` and `MONAN_ATM_REGIONAL.def`. 
 
 We have some scripts that help with this task and are located in the 'eclogs' folder. To use them, update the 'ecflow server port' within these scripts.
 
-### How to confiurate the MONAN forecasts profile?
+## How to confiurate the MONAN forecasts profile?
 
-1. The main settings are in the `setenv` files.
+### 1. The main settings are in the `setenv` files.
 
-1.1. setenv.bash
+#### 1.1. setenv.bash
 
 ~~~
 MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts/setenv.bash
@@ -149,13 +152,15 @@ MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts/sete
 
 This file contains the COMPILER variable, which can be changed to other compilers on the Jaci supercomputer, on egeon, it is set to the GNU default. It also differentiates between compilation tags and the SLURM and PBS submission environment.
 
-To run MONAN Regional, change the global variable MODERUN from G to R in the MONAN_ATM_REGIONAL folder.
+**MONAN Regional**
+
+To run MONAN Regional, change the global variable MODERUN from G to R in the 'MONAN_ATM_REGIONAL' folder.
 
 ~~~
 export MODERUN=G 
 ~~~
 
-1.2. setenv_SCHEDULER_HOST_COMPILER_.bash
+#### 1.2. setenv_SCHEDULER_HOST_COMPILER.bash
 
 ~~~
 MONAN-WorkFlow-OPER/<MONAN_ATM_GLOBAL|REGIONAL>/MONAN/scripts_CD-CT/scripts/stools/setenv_PBS_ian_intel.bash

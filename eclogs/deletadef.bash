@@ -10,7 +10,7 @@ fi
 
 suite=${1}
 
-export ECF_PORT=$(id -u)
+export ECF_PORT=<numero_porta_server>
 
 ecflow_client --delete /${suite}
 
